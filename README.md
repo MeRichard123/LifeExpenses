@@ -1,0 +1,2 @@
+# LifeExpenses
+Django Expense Tracker 
