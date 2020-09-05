@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<div class="container landing-container">
+  <h1>Track your expenses the smart way.</h1>
+  <p class="paragraph">
+    We have created tools to allow you to track what you spend and when, without
+    the added hassle of millions of recipts and notebooks.
+  </p>
+  <div class="button-container">
+    <a href="{% url 'register' %}" class="btn btn-secondary register">
+      Create an Account
+    </a>
+  </div>
+
+  <img class="landing-image" src="{% static 'accounts/wallet.svg' %}" alt="" />
+
+  <div class="cards-container">
+    <div class="card border-primary mb-3" style="max-width: 20rem">
+      <div class="card-body">
+        <h4 class="card-title">Track Spending</h4>
+        <p class="card-text">
+          Track what you spend and where, keeping within your own limit.
+        </p>
+      </div>
+    </div>
+    <div class="card border-primary mb-3" style="max-width: 20rem">
+      <div class="card-body">
+        <h4 class="card-title">Full Feature Lists</h4>
+        <p class="card-text">
+          Track your groceries and or todos with managable todo lists.
+        </p>
+      </div>
+    </div>
+    <div class="card border-primary mb-3" style="max-width: 20rem">
+      <div class="card-body">
+        <h4 class="card-title">Dashboard</h4>
+        <p class="card-text">
+          Quickly view your expenditure from the Dashboard.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {% endblock content %}
+</div>
