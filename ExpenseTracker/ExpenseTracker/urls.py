@@ -10,5 +10,6 @@ urlpatterns = [
     path("register/", account_views.register, name="register"),
 
     path("", include("accounts.urls")),
-    path("", include("expense.urls"))
+    path("", include("expense.urls")),
+    path('todo/', include('todo.urls'))
 ]
