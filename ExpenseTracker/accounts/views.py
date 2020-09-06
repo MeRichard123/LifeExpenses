@@ -1,6 +1,8 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from .forms import UserRegister
 from django.contrib import messages
+from .decorators import authenticated_user
+
 
 # Create your views here.
 
@@ -21,5 +23,6 @@ def register(request):
     return render(request, "register.html", {'form': Form})
 
 
+@authenticated_user
 def landing(req):
     return render(req, "landing.html")
