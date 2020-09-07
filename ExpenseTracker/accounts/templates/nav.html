@@ -14,15 +14,11 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-<<<<<<< HEAD
-      {% comment %}
-=======
       {% if user.is_superuser %}
       <li class="nav-item">
         <a class="nav-link" href="/admin">Admin</a>
       </li>
       {% endif %} {% comment %}
->>>>>>> 73a66e842e2456b6653eefdd7112a3bfc3337f9d
       <li class="nav-item active">
         <a class="nav-link" href="#"
           >Home <span class="sr-only">(current)</span></a
@@ -40,24 +36,20 @@
     </ul>
     <ul class="navbar-nav mt-2 mt-lg-0">
       {% if user.is_authenticated %}
-      <li class="nav-item active">
-<<<<<<< HEAD
-        <a class="nav-link" href="{% url 'todo' %}">ToDo</a>
-=======
-        <a class="nav-link" href="#">ToDo</a>
->>>>>>> 73a66e842e2456b6653eefdd7112a3bfc3337f9d
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'todo' %}">ToDo</a>
+      </li>
+
       <li class="nav-item">
         <a class="nav-link" href="#">Expenses</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn btn-secondary" href="{% url 'logout' %}"
-<<<<<<< HEAD
-          >Logout</a>
-=======
           >Logout</a
         >
->>>>>>> 73a66e842e2456b6653eefdd7112a3bfc3337f9d
       </li>
       {% else %}
       <li class="nav-item active">

@@ -3,20 +3,20 @@
 {% block content %}
 <div class="jumbotron container-fluid">
 <div class="row">
-    <div class="col-sm-8">
-<div class="card border-primary mb-3" style="max-width: 50rem;">
-  <div class="card-header">TODO</div>
-  <div class="card-body">
-    <h4 class="card-title">Update a task</h4>
-    <p class="card-text">
-        <form method="post" action="">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Done" class="btn btn-primary">
-        </form>
-    </p>
-  </div>
-</div>
+    <div class="col-sm-8 m-auto">
+      <div class="card border-primary mb-3 m-auto" style="max-width: 50rem;">
+        <div class="card-header">TODO</div>
+        <div class="card-body">
+          <h4 class="card-title">Update a task</h4>
+          <p class="card-text">
+              <form method="post" action="">
+              {% csrf_token %}
+              {{form.as_p}}
+              <input type="submit" value="Done" class="btn btn-primary">
+              </form>
+          </p>
+        </div>
+      </div>
     </div>
 </div>
 </div>
