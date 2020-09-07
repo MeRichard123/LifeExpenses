@@ -1,13 +1,12 @@
 from django.contrib import admin
-from .models import Category, Todo
+from .models import Todo
 
 
 # Register your models here.
 class TodoAdmin(admin.ModelAdmin):
-    list_display = ['task', 'priority']
-    search_fields = ['category', 'task']
-    list_filter = ['category', 'priority']
+    list_display = ['task', 'priority', 'status']
+    search_fields = ['task']
 
 
-admin.site.register(Category)
 admin.site.register(Todo, TodoAdmin)
+
