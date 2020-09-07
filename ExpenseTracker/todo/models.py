@@ -1,41 +1,33 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 
 PRIORITY = (
-    ('0', ''),
-    ('1', '!'),
-    ('2', '!!'),
-    ('3', '!!!'),
+    ('0', '!'),
+    ('1', '!!'),
+    ('2', '!!!'),
+)
+
+STATUS = (
+    ('0', 'In progress'),
+    ('1', 'Completed'),
 )
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=70, null=True)
-    date_created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ['-date_created']
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
-
-    def __str__(self):
-        return self.name
-
-
 class Todo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     task = models.CharField(max_length=60, null=True,
-                            verbose_name="your task",
-                            help_text="name of your task"
-                            )
+                            verbose_name="your task", )
     priority = models.CharField(max_length=3, choices=PRIORITY, default=0, null=True,
                                 help_text="Set priority of this task",
                                 verbose_name="priority")
-    description = models.CharField(max_length=150, null=True,
-                                   verbose_name="enter description of this task")
-    category = models.ManyToManyField(Category,
-                                      verbose_name="what category?")
+    description = models.CharField(max_length=100, null=True,
+                                   verbose_name="enter description")
+    status = models.CharField(max_length=15, choices=STATUS, default=0, null=True,
+                              help_text="Set status of this task",
+                              verbose_name="status")
     date_added = models.DateTimeField(auto_now_add=True, null=True)
 
     class Meta:
@@ -44,4 +36,4 @@ class Todo(models.Model):
         verbose_name_plural = "Todos"
 
     def __str__(self):
-        return self.task
+        return str(self.task)

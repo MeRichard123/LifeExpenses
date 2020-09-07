@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+<!-- -->
+{% load crispy_forms_tags %}
+<!-- -->
+{% load static %}
+
+<!-- -->
+{% block content %}
+<!-- -->
+<div class="container-fluid form-wrapper">
+  <div class="container form-container">
+    <div class="jumbotron">
+      <h1 class="display-3">You have been logged out.</h1>
+      <p class="lead">
+        We Hope you enjoyed your experience and hope to see you soon.
+      </p>
+      <hr class="my-4" />
+      <p>Would you like to log back in?</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button"
+          >Login</a
+        >
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- -->
+{% endblock content %}<!-- -->

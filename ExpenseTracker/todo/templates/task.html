@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron container-fluid">
+<div class="row">
+    <div class="col-sm-7">
+<div class="card border-primary mb-3" style="max-width: 50rem;">
+  <div class="card-header">TODO</div>
+  <div class="card-body">
+    <h4 class="card-title">Create a task</h4>
+    <p class="card-text">
+        <form method="post" action="{% url 'create_task' %}">
+        {% csrf_token %}
+        {{task_form.as_p}}
+        <input type="submit" value="Done" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Create task">
+        </form>
+    </p>
+  </div>
+</div>
+    </div>
+    <div class="col-sm-5">
+<div class="card border-primary mb-3" style="max-width: 30rem;">
+  <div class="card-header">PENDING</div>
+      <div class="card-body">
+        <h4 class="card-title">Your pending tasks <span class="badge badge-primary badge-pill">{{total_p_tasks}}</span></h4>
+        <p class="card-text">
+            {% if p_tasks %}
+            <ul class="list-group">
+            {% for task in p_tasks %}
+            <li class="list-group-item">
+                {{forloop.counter}}.<a href="{% url 'update_task' task.id %}" class="btn"><strong>{{ task }}</strong></a><br>
+                <small class="small">DESCRIPTION:&nbsp; {{task.description | slice:'30'}}...</small> &nbsp;&nbsp;
+                <small>PRIORITY: &nbsp;<strong>{{task.get_priority_display}}</strong></small>
+                <div style="display:flex;">
+                <form action="{% url 'done_task' task.id %}" method="post">
+                  {% csrf_token %}
+                  <input class="btn btn-primary btn-sm" type="submit" value="Done">
+                </form>&nbsp;&nbsp;
+                <form action="{% url 'delete_task' task.id %}" method="post">
+                  {% csrf_token %}
+                  <input class="btn btn-primary btn-sm" type="submit" value="Delete">
+                </form></div>
+                  <p></p>
+            </li>
+            {% endfor %}
+            </ul>
+            {% else %}
+          <p>You have no pending task</p>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+
+<div class="card border-primary mb-3" style="max-width: 30rem;">
+  <div class="card-header">COMPLETED</div>
+      <div class="card-body">
+        <h4 class="card-title">Your completed tasks <span class="badge badge-primary badge-pill">{{total_c_tasks}}</span></h4>
+        <p class="card-text">
+            {% if c_tasks %}
+            <ul class="list-group">
+            {% for task in c_tasks %}
+            <li class="list-group-item">
+                <form action="{% url 'delete_task' task.id %}" method="post">
+                  {% csrf_token %}
+                    {{forloop.counter}}. <strong>{{ task }}</strong>  - <input class="btn btn-primary btn-sm" type="submit" value="Delete">
+                  <p></p>
+                  </form>
+            </li>
+            {% endfor %}
+            </ul>
+            {% else %}
+          <p>You have no completed task</p>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock content %}
