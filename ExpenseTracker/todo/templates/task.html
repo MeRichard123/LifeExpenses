@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+
+
 {% block content %}
 <div class="jumbotron container-fluid">
 <div class="row">
@@ -11,7 +13,7 @@
     <p class="card-text">
         <form method="post" action="{% url 'create_task' %}">
         {% csrf_token %}
-        {{task_form.as_p}}
+        {{task_form}}
         <input type="submit" value="Done" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Create task">
         </form>
     </p>
@@ -39,7 +41,9 @@
                 <form action="{% url 'delete_task' task.id %}" method="post">
                   {% csrf_token %}
                   <input class="btn btn-primary btn-sm" type="submit" value="Delete">
-                </form></div>
+                </form>
+                <a class="btn btn-primary btn-sm ml-2" href="{% url 'update_task' task.id %}">Update</a>
+                </div>
                   <p></p>
             </li>
             {% endfor %}

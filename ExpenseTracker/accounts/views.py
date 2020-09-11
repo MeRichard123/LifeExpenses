@@ -1,10 +1,8 @@
-from django.shortcuts import render,redirect
-from .forms import UserRegister
-from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import UserRegister
 from django.contrib import messages
 from .decorators import authenticated_user
+
 
 # Create your views here.
 
