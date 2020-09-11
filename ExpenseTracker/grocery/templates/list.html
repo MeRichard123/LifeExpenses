@@ -1,0 +1,10 @@
+<h3>Your lists</h3>
+<ul class="list-group">
+{% for i in mylist %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+    <a href="{% url 'update_list' i.id %}" class="h5">
+        {{i}}
+        </a>
+  </li>
+{% endfor %}
+</ul>

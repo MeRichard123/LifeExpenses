@@ -63,6 +63,7 @@ def done_task(request, pk):
     return redirect('todo')
 
 
+@login_required(login_url="login")
 def update_task(request, pk):
     task = Todo.objects.get(id=pk)
     form = CreateTodo(instance=task)
