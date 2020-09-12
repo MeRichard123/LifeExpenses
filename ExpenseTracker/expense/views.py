@@ -11,9 +11,13 @@ from django.contrib import messages
 @login_required(login_url="login")
 def home(req):
     budgetForm = AddBudget()
+    user = req.user
+    budgetProfile = ExpenseProfile.objects.filter(user=user).first()
+    budget = budgetProfile.monthlyBudget
     context = {
         'user': req.user,
-        'form': budgetForm
+        'form': budgetForm,
+        'budget': budget
     }
     return render(req, "dashboard.html", context)
 

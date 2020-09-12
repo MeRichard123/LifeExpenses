@@ -14,7 +14,6 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      {% comment %}
       {% if user.is_superuser %}
       <li class="nav-item">
         <a class="nav-link" href="/admin">Admin</a>
@@ -23,7 +22,7 @@
     </ul>
     <ul class="navbar-nav mt-2 mt-lg-0">
       {% if user.is_authenticated %}
-      <li class="nav-item active">
+      <li class="nav-item active"></li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'home' %}">Home</a>
       </li>
@@ -38,7 +37,6 @@
         <a class="nav-link" href="{% url 'grocery_view' %}">Grocery</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link btn btn-secondary" href="{% url 'logout' %}">Logout</a>
         <a class="nav-link btn btn-secondary" href="{% url 'logout' %}"
           >Logout</a
         >
