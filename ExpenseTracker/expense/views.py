@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import ExpenseItem, ExpenseProfile
+from todo.models import Todo
 from .forms import CreateExpense, AddBudget
 from django.contrib import messages
 
@@ -10,14 +11,21 @@ from django.contrib import messages
 
 @login_required(login_url="login")
 def home(req):
+    # Form for setting a budget limit
     budgetForm = AddBudget()
     user = req.user
+    # Grab the current budget limit
     budgetProfile = ExpenseProfile.objects.filter(user=user).first()
     budget = budgetProfile.monthlyBudget
+    # Get current updates
+    LatestExpenses = ExpenseItem.objects.all()[:3]
+    LatestTodos = Todo.objects.all().order_by("-priority")
     context = {
         'user': req.user,
         'form': budgetForm,
-        'budget': budget
+        'budget': budget,
+        'latestExpenses': LatestExpenses,
+        'latestTodos': LatestTodos,
     }
     return render(req, "dashboard.html", context)
 
