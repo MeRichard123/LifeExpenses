@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+
+    <div class="row">
+{% if mylist %}
+
+<div class="col-sm-2">
+    {% include 'list.html' %}
+    <br>
+    <a href="{% url 'create_list' %}" class="btn btn-primary btn-sm">Create List</a>
+    <a href="{% url 'create_item' %}" class="btn btn-primary btn-sm">Create Item</a>
+</div>
+
+<div class="col-sm-7">
+{% for i in mylist %}
+    <h3>{{i}}</h3>
+    Status: <small>{{i.status}}</small><br>
+    Date Created: <small>{{i.date_created}}</small>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total</th>
+    </tr>
+    </thead>
+{% for item in items %}
+
+{% if item.list.user == request.user and item.list.name == i.name %}
+<tr>
+    <td>{{item}}</td>
+    <td>{{item.price}}</td>
+    <td>{{item.quantity}}</td>
+    <td>{{item.total_item}}</td>
+    <td><form action="{% url 'update_item' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Update" class="btn btn-primary btn-sm">
+    </form></td>
+    <td><form action="{% url 'delete_item' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete" class="btn btn-primary btn-sm">
+    </form></td>
+    </tr>
+{% else %}
+{% endif %}
+
+{% endfor %}
+    </table>
+    <form action="{% url 'delete_list' i.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete" class="btn btn-primary btn-sm">
+    </form>
+    <p></p>
+{% endfor %}
+</div>
+
+<div class="col-sm-2">
+<h3>Completed list</h3>
+    <ul>
+    {% for i in mylist %}
+    {% if i.status.lower == "completed" %}
+        <li><h5>{{i}}</h5></li>
+    {% else %}
+    {% endif %}
+    {% endfor %}
+        </ul>
+</div>
+{% else %}
+<p>You have no list and item</p>
+<a>Add list</a>
+<a>Add item</a>
+{% endif %}
+
+</div>
+</div>
+
+{% endblock %}
