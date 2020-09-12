@@ -8,6 +8,20 @@
 {% block content %}
 <div class="container">
   <h1 class="text-center mt-4">Welcome {{user.username}}</h1>
+
+  <div class="card border-primary m-3 ml-auto mr-auto" style="max-width: 50rem">
+    <div class="card-body">
+      <h4 class="card-title text-center">Set your monthly Budget</h4>
+      <div class="card-text">
+        <form action="{% url 'add_budget' %}" method="post" class="text-center">
+          {% csrf_token %}
+          <!-- -->
+          {{form.as_p}}
+          <input type="submit" value="Set Limit" class="btn btn-primary" />
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}

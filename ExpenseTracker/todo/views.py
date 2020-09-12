@@ -24,6 +24,7 @@ def task(request):
     }
     return render(request, "task.html", context)
 
+
 @login_required(login_url="login")
 def create_task(request):
     if request.method == "POST":
@@ -44,12 +45,14 @@ def create_task(request):
             store.save()
     return redirect('todo')
 
+
 @login_required(login_url="login")
 def delete_task(request, pk):
     todo = Todo.objects.get(id=pk)
     if request.method == "POST":
         todo.delete()
     return redirect('todo')
+
 
 @login_required(login_url="login")
 def done_task(request, pk):

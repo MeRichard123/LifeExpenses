@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+<!-- -->
+{% load static %}
+<!-- -->
+
+{% block content %}
+<!-- -->
+<div class="container">
+  {% if budget != none %}
+  <h1>Your monthly Budget: {{budget}}</h1>
+  {% else %}
+  <h1>Please Set your Budget on the Home Page</h1>
+  {% endif %}
+
+  <div class="card border-primary m-3 ml-auto mr-auto" style="max-width: 50rem">
+    <div class="card-header">Expense Tracker</div>
+    <div class="card-body">
+      <h4 class="card-title text-center">Add an Expense</h4>
+      <div class="card-text">
+        <form
+          action="{% url 'create_expense' %}"
+          method="post"
+          class="text-center"
+        >
+          {% csrf_token %}
+          <!-- -->
+          {{Createform.as_p}}
+          <input type="submit" value="Add Expense" class="btn btn-primary" />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in expenses %}
+      <!-- -->
+      {% if item.userProfile.user == user %}
+      <tr>
+        <td>{{item.name}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.date_purchased}}</td>
+        <td>
+          <form action="{% url 'remove_expense' item.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endif %}
+      <!-- -->
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if sum > budget %}
+  <p style="font-weight: bold; font-size: 2.5rem; color: red">
+    Total : {{sum}} <small>(Exceeds Budget)</small>
+  </p>
+  {% else %}
+  <p style="font-weight: bold; font-size: 2.5rem">Total : {{sum}}</p>
+  {% endif %}
+
+  <!-- -->
+</div>
+{% endblock content %}
