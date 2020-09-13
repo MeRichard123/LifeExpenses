@@ -6,8 +6,6 @@ from todo.models import Todo
 from .forms import CreateExpense, AddBudget
 from django.contrib import messages
 
-# Create your views here.
-
 
 @login_required(login_url="login")
 def home(req):
@@ -18,14 +16,20 @@ def home(req):
     budgetProfile = ExpenseProfile.objects.filter(user=user).first()
     budget = budgetProfile.monthlyBudget
     # Get current updates
-    LatestExpenses = ExpenseItem.objects.all()[:3]
-    LatestTodos = Todo.objects.all().order_by("-priority")
+    LatestExpenses = ExpenseItem.objects.filter(userProfile=budgetProfile)[:3]
+    NumberOfExpenses = len(LatestExpenses)
+    LatestTodos = Todo.objects.filter(
+        user=user, status='0').order_by("-priority")
+    incompleteTodos = len(LatestTodos)
+
     context = {
         'user': req.user,
         'form': budgetForm,
         'budget': budget,
         'latestExpenses': LatestExpenses,
         'latestTodos': LatestTodos,
+        'count': incompleteTodos,
+        'expCount': NumberOfExpenses
     }
     return render(req, "dashboard.html", context)
 
@@ -39,10 +43,11 @@ def ExpenseList(req):
     expenseForm = CreateExpense()
 
     totalSum = 0
-    items = user.profile.all()
-    for i in items:
-        for item in i.item.all():
+
+    for item in expenseList:
+        if item.userProfile.user == user:
             totalSum += item.price
+
     context = {
         'expenses': expenseList,
         'user': user,
