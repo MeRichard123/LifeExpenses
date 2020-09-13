@@ -14,7 +14,7 @@ class CreateList(ModelForm):
 
 
 class CreateItem(ModelForm):
-    name = forms.CharField(label="Enter name of your list",
+    name = forms.CharField(label="Enter name of your Item",
                            widget=forms.TextInput(attrs={'class': 'form-control'}))
     
     class Meta:

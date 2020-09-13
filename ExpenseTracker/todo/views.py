@@ -31,8 +31,7 @@ def create_task(request):
         task_form = CreateTodo(request.POST)
         if task_form.is_valid():
             data = task_form.cleaned_data
-            print(request.POST.get('category'))
-            store = Todo(user=request.user,**data)
+            store = Todo(user=request.user, **data)
             store.save()
     return redirect('todo')
 
