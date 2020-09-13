@@ -4,7 +4,6 @@ from .models import Todo, STATUS, PRIORITY
 
 
 class CreateTodo(ModelForm):
-    #status = forms.ChoiceField(choices=STATUS, widget=forms.RadioSelect())
     priority = forms.ChoiceField(choices=PRIORITY, widget=forms.RadioSelect())
     task = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))

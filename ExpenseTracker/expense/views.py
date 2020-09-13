@@ -39,8 +39,9 @@ def ExpenseList(req):
     expenseForm = CreateExpense()
 
     totalSum = 0
-    for item in expenseList:
-        if item.userProfile.user == user:
+    items = user.profile.all()
+    for i in items:
+        for item in i.item.all():
             totalSum += item.price
     context = {
         'expenses': expenseList,
