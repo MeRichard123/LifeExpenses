@@ -32,6 +32,13 @@ class List(models.Model):
         verbose_name = 'Shopping List'
         verbose_name_plural = 'Shopping Lists'
 
+    @property
+    def total_list(self, value=0):
+        items = self.item.all()
+        for i in items:
+            value += i.total_item
+        return value
+
 
 class Item(models.Model):
     name = models.CharField(max_length=70,

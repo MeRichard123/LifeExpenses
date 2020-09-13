@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class ExpenseProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="profile")
     monthlyBudget = models.DecimalField(
         max_digits=50, decimal_places=2, null=True, blank=True)
 
@@ -15,7 +15,7 @@ class ExpenseProfile(models.Model):
 
 class ExpenseItem(models.Model):
     userProfile = models.ForeignKey(
-        ExpenseProfile, null=True, on_delete=models.SET_NULL)
+        ExpenseProfile, null=True, on_delete=models.SET_NULL, related_name="item")
     name = models.CharField(max_length=100, null=True)
     price = models.DecimalField(max_digits=50, decimal_places=2, null=True)
     date_purchased = models.DateField(auto_now=False)
