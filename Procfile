@@ -1,1 +1,1 @@
-web: gunicorn ExpenseTracker
+web: gunicorn ExpenseTracker.wsgi
