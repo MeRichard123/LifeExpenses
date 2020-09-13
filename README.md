@@ -1,6 +1,8 @@
 # LifeExpenses
 
-Django Expense Tracker
+## Django Expense Tracker.
+
+This was a collaborative Project.
 
 # Features
 
@@ -10,3 +12,5 @@ Django Expense Tracker
 
 Sketchy CSS ->
 https://bootswatch.com/4/sketchy/bootstrap.css
+
+# Developers
