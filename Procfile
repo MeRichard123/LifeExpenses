@@ -1,1 +1,1 @@
-web: gunicorn ExpenseTracker.wsgi --chdir /ExpenseTracker/
+web: gunicorn ExpenseTracker/wsgi.py
