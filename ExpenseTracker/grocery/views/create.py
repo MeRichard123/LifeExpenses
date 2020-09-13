@@ -11,11 +11,9 @@ def create_list(request):
     if request.method == "POST":
         form = CreateList(request.POST)
         if form.is_valid():
-            name = form.cleaned_data.get('name')
-            List.objects.create(
-                user=request.user,
-                name=name,
-            )
+            data = form.cleaned_data
+            mylist = List(user=request.user, **data)
+            mylist.save()
         return redirect('grocery_view')  
     context = {'form': form}
     return render(request, "grocery_create.html", context)

@@ -30,18 +30,9 @@ def create_task(request):
     if request.method == "POST":
         task_form = CreateTodo(request.POST)
         if task_form.is_valid():
-            task = task_form.cleaned_data.get('task')
-            priority = task_form.cleaned_data.get('priority')
-            description = task_form.cleaned_data.get('description')
-            status = task_form.cleaned_data.get('status')
+            data = task_form.cleaned_data
             print(request.POST.get('category'))
-            store = Todo(
-                user=request.user,
-                task=task,
-                priority=priority,
-                description=description,
-                status=status,
-            )
+            store = Todo(user=request.user,**data)
             store.save()
     return redirect('todo')
 

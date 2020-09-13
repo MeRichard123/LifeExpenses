@@ -7,11 +7,11 @@ from django.contrib.auth.models import User
 @login_required(login_url='login')
 def grocery_view(request):
     items = Item.objects.all()
-    mylist = request.user.list.all()
+    myList = request.user.list.all()
 
     context = {
         'items': items,
-        'mylist': mylist,
+        'myList': myList,
     }
 
     return render(request, "grocery_view.html", context)
