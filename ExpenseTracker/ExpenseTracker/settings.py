@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("KEY")
+SECRET_KEY = os.environ.get("KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -133,6 +133,7 @@ LOGIN_REDIRECT_URL = "home"
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -140,5 +141,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_POST = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env('EMAIL_USERNAME')
-EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
+EMAIL_HOST_USER = os.environ.get('EMAIL_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
